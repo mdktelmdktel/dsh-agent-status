@@ -1,0 +1,3 @@
+- insert:
+    - id: agent-status
+      name: dsh-agent-status

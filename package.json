@@ -1,0 +1,57 @@
+{
+  "name": "dsh-agent-status",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "会话标题栏里的 agent 实时进度条：现在在干什么、第几步、跑了多久、待办进度",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "agent-status",
+    "progress",
+    "status-bar",
+    "session",
+    "tool-call",
+    "ui"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "author": "mdktelmdktel",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdktelmdktel/dsh-agent-status.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mdktelmdktel/dsh-agent-status/issues"
+  },
+  "homepage": "https://github.com/mdktelmdktel/dsh-agent-status#readme",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  }
+}
