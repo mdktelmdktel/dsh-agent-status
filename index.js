@@ -20,12 +20,53 @@ const MAX_RECENT = 6
 /** Longest argument summary kept for the pill. */
 const MAX_DETAIL = 70
 
+import { spawn } from 'node:child_process'
+import { existsSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+
+/**
+ * Launch the always-on-top desktop window that mirrors this plugin's state
+ * (bottom-right corner of the screen). Disabled with DSH_AGENT_STATUS_HUD=0.
+ */
+function startDesktopHud(ctx) {
+  if (process.platform !== 'win32') return () => {}
+  if (process.env.DSH_AGENT_STATUS_HUD === '0') return () => {}
+  let script = ''
+  try {
+    script = fileURLToPath(new URL('./desktop-hud.ps1', import.meta.url))
+  } catch {
+    return () => {}
+  }
+  if (!existsSync(script)) return () => {}
+  try {
+    const child = spawn(
+      'powershell.exe',
+      ['-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass', '-File', script, '-ParentPid', String(process.pid)],
+      { detached: true, stdio: 'ignore', windowsHide: true },
+    )
+    child.unref()
+    ctx.logger?.info?.('agent-status: desktop HUD started')
+    return () => {
+      try {
+        child.kill()
+      } catch {
+        /* the window may already be gone */
+      }
+    }
+  } catch (error) {
+    ctx.logger?.warn?.(`agent-status: desktop HUD failed: ${String(error?.message ?? error)}`)
+    return () => {}
+  }
+}
+
 export const name = 'agent-status'
 
 export const inject = ['webServer']
 
 export function apply(ctx) {
   /** @type {Map<string, object>} sessionId -> state */
+  ctx.effect(() => startDesktopHud(ctx))
+
   const store = new Map()
 
   function entryFor(sessionId) {

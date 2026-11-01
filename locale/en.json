@@ -1,6 +1,6 @@
 {
   "meta": {
     "title": "Agent Step Bar",
-    "description": "Shows live in the session header what the agent is doing now: current action, step number, turn duration and todo progress."
+    "description": "Live progress pill in the session header plus an always-on-top floating window in the bottom-right corner: current action, step number, turn duration and todo progress."
   }
 }

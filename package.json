@@ -1,8 +1,8 @@
 {
   "name": "dsh-agent-status",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
-  "description": "会话标题栏里的 agent 实时进度条：现在在干什么、第几步、跑了多久、待办进度",
+  "description": "Agent 进度：会话标题栏胶囊 + 屏幕右下角常驻置顶窗口（独立桌面窗口，永远在最上层）",
   "keywords": [
     "dsh",
     "dsh-plugin",
@@ -12,7 +12,11 @@
     "status-bar",
     "session",
     "tool-call",
-    "ui"
+    "ui",
+    "overlay",
+    "always-on-top",
+    "hud",
+    "floating-window"
   ],
   "exports": {
     ".": "./index.js",
@@ -23,6 +27,7 @@
   "files": [
     "index.js",
     "client.js",
+    "desktop-hud.ps1",
     "cordis.patch.yml",
     "locale/*.json",
     "icon.svg",
