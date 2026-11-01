@@ -3,4 +3,4 @@ node_modules/
 .DS_Store
 
 # local push helper
-push.bat
+push.bat.txt

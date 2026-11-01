@@ -1,6 +1,6 @@
 # dsh-agent-status
 
-给 [DeepSeek Harness](https://github.com/deepseek-ai) 用的一个小插件：**在会话标题栏实时显示 agent 现在做到哪一步**。
+给 [DeepSeek Harness](https://github.com/deepseek-ai)（`dsh`）用的一个小插件：**在会话标题栏实时显示 agent 现在做到哪一步**。
 
 不用点开、不用翻记录，一眼就能看到它当前在干什么、做到第几步、这一轮跑了多久、待办推到第几项。
 
@@ -28,21 +28,19 @@
 
 ## 安装
 
-### 从 GitHub 安装（推荐）
-
-在 Plugin Manager 里安装 bundle：
-
 ```
 github:mdktelmdktel/dsh-agent-status
 ```
 
-或者手工等价操作（profile 目录 `~/.dsh/profiles/<name>`）：
+在 Plugin Manager 里装这个 bundle，或手工等价操作（profile 目录 `~/.dsh/profiles/<name>`）：
 
 1. `package.json` 的 `dependencies` 加 `"dsh-agent-status": "github:mdktelmdktel/dsh-agent-status"`
 2. `package.json` 的 `dsh.profile.bundles` 加 `"dsh-agent-status"`
 3. `pnpm install`，HMR 会当场激活新 bundle
 
-装完**刷新一次页面**（`Ctrl+R`）就能看到胶囊。想关掉：在该 bundle 的插件行上 `disabled: true`。
+装完**刷新一次页面**（`Ctrl+R`）就能看到胶囊。想关掉：插件行上 `disabled: true`。
+
+> npm 上有个同名包（`dsh-agent-status`，作者 `r2s`，2026-10-20 发布，做的是类似的事），**不是**这个插件。请认准 `mdktelmdktel/dsh-agent-status`。
 
 ## 原理
 
